@@ -1,6 +1,7 @@
 apiVersion: yaks.citrusframework.org/v1alpha1
 kind: Test
 metadata:
+  name: fly-test
   labels:
     app: yaks
 spec:
