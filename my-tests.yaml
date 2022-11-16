@@ -14,12 +14,29 @@ spec:
         Background:
              Given HTTP request timeout is 60000 ms
              Given start browser
-        Scenario: should error
+
+        Scenario: Add owner
+            Given user navigates to "http://spring-petclinic.demo-dev.svc.cluster.local:8080/owners/new"
+            When User enters text "hao" to input with id="firstName"
+            Then sleep 50 ms
+            When User enters text "zhao" to input with id="lastName"
+            Then sleep 50 ms
+            When User enters text "panyu" to input with id="address"
+            Then sleep 50 ms
+            When User enters text "guangzhou" to input with id="city"
+            Then sleep 50 ms
+            When User enters text "12345" to input with id="telephone"
+            Then sleep 50 ms
+            When User clicks button with class-name="btn"
+            Then browser page should display element with xpath="/html/body/div/div/table[1]/tbody/tr[1]/td/b" having
+             | text | hao zhao |
+
+        Scenario: search user
           Given user navigates to "http://spring-petclinic.demo-dev.svc.cluster.local:8080/owners/find"
           When User enters text "zhao" to input with id="lastName"
           Then sleep 100 ms
           When User clicks button with class-name="btn"
           Then browser page should display element with xpath="/html/body/div/div/table[1]/tbody/tr[1]/td/b" having
-           | text | Haoting Zhao |
+           | text | hao zhao |
     language: feature
     name: example.feature
