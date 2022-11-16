@@ -11,7 +11,7 @@ spec:
     image: 'selenium/standalone-chrome:106.0'
   source:
     content: |-
-      Feature: input search
+      Feature: input and search
         Background:
              Given HTTP request timeout is 60000 ms
              Given start browser
