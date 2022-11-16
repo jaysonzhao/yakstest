@@ -1,0 +1,25 @@
+apiVersion: yaks.citrusframework.org/v1alpha1
+kind: Test
+metadata:
+  labels:
+    app: yaks
+spec:
+  env:
+    - YAKS_SELENIUM_BROWSER_TYPE=chrome
+  selenium:
+    image: 'selenium/standalone-chrome:106.0'
+  source:
+    content: |-
+      Feature: input search
+        Background:
+             Given HTTP request timeout is 60000 ms
+             Given start browser
+        Scenario: should error
+          Given user navigates to "http://spring-petclinic.demo-dev.svc.cluster.local:8080/owners/find"
+          When User enters text "zhao" to input with id="lastName"
+          Then sleep 100 ms
+          When User clicks button with class-name="btn"
+          Then browser page should display element with xpath="/html/body/div/div/table[1]/tbody/tr[1]/td/b" having
+           | text | Haoting Zhao |
+    language: feature
+    name: example.feature
